@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+                android:id="@+id/opengl_sample_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="openGL三角形"
+        />
+        <Button
+                android:id="@+id/opengl_sample_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="openGL长方形"
+        />
+
+        <Button
+                android:id="@+id/opengl_texture_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="显示两张纹理"
+        />
+        <Button
+                android:id="@+id/opengl_texture_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="多个纹理共用一个纹理单元"
+        />
+
+        <Button
+                android:id="@+id/opengl_2_mp4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="openGL保存成MP4"
+        />
+
+        <Button
+                android:id="@+id/camera_filter_2_mp4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="摄像头保存成MP4并滤镜"
+        />
+
+</LinearLayout>
