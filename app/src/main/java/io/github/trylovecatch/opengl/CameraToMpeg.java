@@ -65,7 +65,7 @@ import android.view.Surface;
  */
 public class CameraToMpeg {
     private static final String TAG = "CameraToMpegTest";
-    private static final boolean VERBOSE = false;           // lots of logging
+    private static final boolean VERBOSE = true;           // lots of logging
 
     // where to put the output file (note: /sdcard requires WRITE_EXTERNAL_STORAGE permission)
     private static final File OUTPUT_DIR = Environment.getExternalStorageDirectory();
@@ -99,6 +99,8 @@ public class CameraToMpeg {
 
     // allocate one of these up front so we don't need to do it every time
     private MediaCodec.BufferInfo mBufferInfo;
+
+    public volatile boolean mIsRunning = true;
 
     /** test entry point */
     public void testEncodeCameraToMp4() throws Throwable {
@@ -164,7 +166,10 @@ public class CameraToMpeg {
             SurfaceTexture st = mStManager.getSurfaceTexture();
             int frameCount = 0;
 
-            while (System.nanoTime() < desiredEnd) {
+            mIsRunning = true;
+
+//            while (System.nanoTime() < desiredEnd) {
+            while (mIsRunning) {
                 // Feed any pending encoder output into the muxer.
                 drainEncoder(false);
 
@@ -208,7 +213,9 @@ public class CameraToMpeg {
 
             // send end-of-stream to encoder, and drain remaining output
             drainEncoder(true);
-        } finally {
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
             // release everything we grabbed
             releaseCamera();
             releaseEncoder();
@@ -372,6 +379,7 @@ public class CameraToMpeg {
         try {
             mMuxer = new MediaMuxer(outputPath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4);
         } catch (IOException ioe) {
+            ioe.printStackTrace();
             throw new RuntimeException("MediaMuxer creation failed", ioe);
         }
 
